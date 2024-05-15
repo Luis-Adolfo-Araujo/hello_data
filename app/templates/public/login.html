@@ -73,13 +73,14 @@
     </style>
 </head>
 <body>
+  <form action="/login" method="POST">
     <div class="container">
         <div class="title" style="color: #ccc;">
           <h1>diet.ia</h1>
         </div>
         
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Usuário">
+          <input type="email" name="email" class="form-control" placeholder="Usuário">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -88,7 +89,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Senha">
+          <input type="password" name="password" class="form-control" placeholder="Senha">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -98,5 +99,6 @@
         
         <button type="submit">Login</button>
     </div>
+  </form>
 </body>
 </html>
