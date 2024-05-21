@@ -1,224 +1,156 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>diet.ia | Entrar</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../static/css/signup.css" />
+    <title>diet.ia | Cadastrar</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo"><a href="/">diet.ia</a></div>
+      <nav></nav>
+    </header>
+    <div class="form-container">
+      <form action="/register" class="form" method="POST">
+        <div class="form-column">
+          <div class="flex-column">
+            <label>Nome</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="nome" class="input" placeholder="Nome" />
+          </div>
+          
+          <div class="flex-column">
+            <label>Email</label>
+          </div>
+          <div class="inputForm">
+            <input type="email" name="email" class="input" placeholder="Email" />
+          </div>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css" integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css" integrity="sha512-IuO+tczf4J43RzbCMEFggCWW5JuX78IrCJRFFBoQEXNvGI6gkUw4OjuwMidiS4Lm9Q2lILzpJwZuMWuSEeT9UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000000;
-            color: #FFFFFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            width: 90%;
-            max-width: 600px;
-            padding: 32px;
-            background-color: #808080;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .title {
-            font-size: 2em;
-            color: #008000;
-            margin-bottom: 1em;
-        }
-        input[type=text], input[type=password], input[type=email], input[type=tel], input[type=date], select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #008000;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 4px;
-        }
-        button:hover {
-            opacity: 0.8;
-        }
-        .form-control {
-            height: auto;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-        }
-        .col-md-6 {
-            flex: 0 0 48%;
-        }
-    </style>
-</head>
-<body>
-    <form action="/register" method="POST">
-        <div class="container">
-            <div class="title" style="color: #ccc;">
-                <h1>diet.ia</h1>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="input-group mb-3">
-                        <input type="text" name="nome" class="form-control" placeholder="Nome">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
+          <div class="flex-column">
+            <label>Senha</label>
+          </div>
+          <div class="inputForm">
+            <input type="password" name="senha" class="input" placeholder="Senha" />
+          </div>
 
-                    <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Senha">
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                          </div>
-                        </div>
-                      </div>
+          <div class="flex-column">
+            <label>CPF</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="cpf" class="input" placeholder="CPF" />
+          </div>
 
-                    <div class="input-group mb-3">
-                        <input type="date" name="data_nascimento" class="form-control" placeholder="Data de Nascimento">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-calendar"></span>
-                            </div>
-                        </div>
-                    </div>
+          <div class="flex-column">
+            <label>Telefone</label>
+          </div>
+          <div class="inputForm">
+            <input type="tel" name="telefone" class="input" placeholder="Telefone" />
+          </div>
 
-                    <div class="input-group mb-3">
-                        <select name="sexo" class="form-control">
-                            <option value="" selected disabled>Sexo</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                        </select>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-venus-mars"></span>
-                            </div>
-                        </div>
-                    </div>
+          <div class="flex-column">
+            <label>Data de Nascimento</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="data_nascimento" class="input" placeholder="DD/MM/AAAA" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 47" oninput="formatDate(this)" />
+          </div>
 
-                    <div class="input-group mb-3">
-                        <select name="gestante" class="form-control">
-                            <option value="" selected disabled>Gestante</option>
-                            <option value="false">Não</option>
-                            <option value="true">Sim</option>
-                        </select>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-baby"></span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="tel" name="telefone" class="form-control" placeholder="Telefone">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-phone"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="Cpf" class="form-control" placeholder="CPF">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-id-card"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="Cep" class="form-control" placeholder="CEP">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-map-marker"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="Rua" class="form-control" placeholder="Rua">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-road"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="Numero" class="form-control" placeholder="Número">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-building"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="Bairro" class="form-control" placeholder="Bairro">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-map"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="Cidade" class="form-control" placeholder="Cidade">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-city"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="UF" class="form-control" placeholder="UF">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-flag"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit">Cadastrar</button>
+          <div class="flex-column">
+            <label>Sexo</label>
+            <select name="sexo" class="input">
+              <option value="">Selecione</option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+            </select>
+          </div>
         </div>
-    </form>
-</body>
+
+        <div class="form-column">
+          <div class="flex-column" id="gestante-container" style="display: none;">
+            <label>Gestante</label>
+            <select name="gestante" class="input">
+              <option value="">Selecione</option>
+              <option value="sim">Sim</option>
+              <option value="nao">Não</option>
+            </select>
+          </div>
+
+          <div class="flex-column">
+            <label>CEP</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="cep" class="input" placeholder="CEP" />
+          </div>
+
+
+          <div class="flex-column">
+            <label>Rua</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="rua" class="input" placeholder="Rua" />
+          </div>
+          
+          
+          <div class="flex-column">
+            <label>Número</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="numero" class="input" placeholder="Número" />
+          </div>
+          
+          
+          <div class="flex-column">
+            <label>Bairro</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="bairro" class="input" placeholder="Bairro" />
+          </div>
+          
+          
+          <div class="flex-column">
+            <label>Cidade</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="cidade" class="input" placeholder="Cidade" />
+          </div>
+          
+          
+          <div class="flex-column">
+            <label>UF</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="uf" class="input" placeholder="UF" />
+          </div>
+          
+          
+        </div>
+        <button class="button-submit">Cadastrar</button>
+      </form>
+    </div>
+
+    <script>
+      document.querySelector('select[name="sexo"]').addEventListener('change', function () {
+        var gestanteContainer = document.getElementById('gestante-container');
+        if (this.value === 'feminino') {
+          gestanteContainer.style.display = 'block';
+        } else {
+          gestanteContainer.style.display = 'none';
+        }
+      });
+    </script>
+
+<script>
+    function formatDate(input) {
+        input.value = input.value.replace(/[^\d/]/g, '');
+    
+        if (input.value.length > 2 && input.value.charAt(2) !== '/') {
+            input.value = input.value.slice(0, 2) + '/' + input.value.slice(2);
+        }
+        if (input.value.length > 5 && input.value.charAt(5) !== '/') {
+            input.value = input.value.slice(0, 5) + '/' + input.value.slice(5);
+        }
+    }
+    </script>
+  </body>
 </html>
