@@ -8,17 +8,17 @@ from .models import Paciente
 auth = Blueprint('auth', __name__)
 main = Blueprint('main', __name__)
 
-@auth.route("/home", methods=["GET"])
-@login_required
-def home():
-    if current_user.is_authenticated:
-        return render_template("public/templates/home.html")
-
 @auth.route("/", methods=["GET"])
 def main_route():
     if current_user.is_authenticated:
         return redirect(url_for('auth.home'))
     return render_template("public/index.html")
+
+@auth.route("/home", methods=["GET"])
+@login_required
+def home():
+    if current_user.is_authenticated:
+        return render_template("public/templates/home.html")
 
 @auth.route("/login")
 def render_login():
