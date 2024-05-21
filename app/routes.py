@@ -1,6 +1,6 @@
 from utils import *
 import psycopg2
-from flask import Response, request, jsonify, session, render_template, flash, Blueprint, redirect, url_for
+from flask import request, jsonify, session, render_template, flash, Blueprint, redirect, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import Paciente
@@ -74,28 +74,26 @@ def signup_post():
         nome = request.form.get('nome')
         data_nascimento = request.form.get('data_nascimento')
         sexo = request.form.get('sexo')
-        if sexo == 'feminino':
-            if request.form.get('gestante'):
-                gestante = False
-            else:
-                gestante = True
-        else:
-            gestante = False
+        gestante = True if sexo == 'feminino' and request.form.get('gestante') == 'sim' else False
         telefone = request.form.get('telefone')
-        cpf = request.form.get('Cpf')
-        cep = request.form.get('Cep')
-        rua = request.form.get('Rua')
-        numero = request.form.get('Numero')
-        bairro = request.form.get('Bairro')
-        cidade = request.form.get('Cidade')
-        uf = request.form.get('UF')
+        cpf = request.form.get('cpf')
+        cep = request.form.get('cep')
+        rua = request.form.get('rua')
+        numero = request.form.get('numero')
+        bairro = request.form.get('bairro')
+        cidade = request.form.get('cidade')
+        uf = request.form.get('uf')
+        print(cpf)
         query = '''SELECT cpf FROM paciente WHERE cpf = %s;'''
         cursor.execute(query, (cpf,))
         user = cursor.fetchone()
+        print(user)
 
         if user:
-            print("CPF já cadastrado")
-            return redirect(url_for('auth.signup'))
+            error_message = "CPF ja cadastrado"
+            redirect(url_for('auth.signup'))
+            print(error_message)
+            return jsonify({"error": error_message}), 400
         
         insert_query = '''INSERT INTO paciente (email, senha, nome, data_nascimento, sexo, gestante, telefone, cpf, cep, rua, numero, bairro, cidade, uf)
                           VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);'''
