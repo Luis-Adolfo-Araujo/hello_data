@@ -24,8 +24,7 @@ def home():
 def render_login():
     if current_user.is_authenticated:
         return redirect(url_for('auth.home'))
-    error = request.args.get('error')
-    return render_template("public/templates/login.html", error=error)
+    return render_template("public/templates/login.html")
 
 @auth.route("/login_post", methods=["POST"])
 def login():
@@ -71,11 +70,17 @@ def signup_post():
 
     try:
         email = request.form.get('email')
-        senha = request.form.get('password')
+        senha = request.form.get('senha')
         nome = request.form.get('nome')
         data_nascimento = request.form.get('data_nascimento')
         sexo = request.form.get('sexo')
-        gestante = request.form.get('gestante')
+        if sexo == 'feminino':
+            if request.form.get('gestante'):
+                gestante = False
+            else:
+                gestante = True
+        else:
+            gestante = False
         telefone = request.form.get('telefone')
         cpf = request.form.get('Cpf')
         cep = request.form.get('Cep')
@@ -84,7 +89,6 @@ def signup_post():
         bairro = request.form.get('Bairro')
         cidade = request.form.get('Cidade')
         uf = request.form.get('UF')
-        
         query = '''SELECT cpf FROM paciente WHERE cpf = %s;'''
         cursor.execute(query, (cpf,))
         user = cursor.fetchone()
@@ -99,7 +103,7 @@ def signup_post():
         conn.commit()
 
         print("Usuário cadastrado com sucesso!")
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('auth.render_login'))
 
     except Exception as e:
         print("Erro ao cadastrar usuário: " + str(e))

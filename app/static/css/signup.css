@@ -109,6 +109,8 @@ body {
     padding: 10px;
     background: #68a937;
     color: white;
+    text-decoration: none;
+    color: inherit;
     border: none;
     border-radius: 5px;
     cursor: pointer;

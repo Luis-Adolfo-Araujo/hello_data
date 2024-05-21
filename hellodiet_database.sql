@@ -1,9 +1,9 @@
 CREATE TABLE paciente (
     User_id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
-    data_nascimento DATE,
+    data_nascimento VARCHAR(12),
     sexo VARCHAR(10),
-    gestante BOOLEAN,
+    gestante BOOLEAN DEFAULT FALSE,
     email VARCHAR(100),
     telefone VARCHAR(20),
     Cpf VARCHAR(20),
