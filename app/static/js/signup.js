@@ -92,7 +92,9 @@ function formatTelefone(input) {
     .then(data => {
         if (data.error) {
             document.getElementById('mensagem').innerText = data.error; 
-        } 
+        } else {
+            window.location.href = '/login'; 
+        }
     })
     .catch(error => console.error('Error:', error));
 }
