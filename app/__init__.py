@@ -23,13 +23,15 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        return models.query.get(int(user_id))
+        from .models import Paciente
+        return Paciente.get(user_id)
+
 
     # Register blueprints
-    from .hello_run import auth as auth_blueprint
+    from .routes import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from .hello_run import main as main_blueprint
+    from .routes import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     return app

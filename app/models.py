@@ -1,22 +1,20 @@
-from . import db
+from flask_login import UserMixin
+from utils import *
 
-class Paciente(db.Model):
-    __tablename__ = 'paciente'
-    
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome = db.Column(db.String(100), nullable=False)
-    data_nascimento = db.Column(db.Date, nullable=False)
-    sexo = db.Column(db.String(10), nullable=False)
-    gestante = db.Column(db.Boolean, nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    telefone = db.Column(db.String(20), nullable=False)
-    cpf = db.Column(db.String(20), nullable=False, unique=True)
-    cep = db.Column(db.String(20), nullable=False)
-    rua = db.Column(db.String(100), nullable=False)
-    numero = db.Column(db.String(20), nullable=False)
-    bairro = db.Column(db.String(100), nullable=False)
-    cidade = db.Column(db.String(100), nullable=False)
-    uf = db.Column(db.String(10), nullable=False)
+class Paciente(UserMixin):
+    def __init__(self, user_id):
+        self.id = user_id
 
-    def __repr__(self):
-        return f'<Paciente {self.nome}>'
+    @staticmethod
+    def get(user_id):
+        conn, cursor = get_db_connection()
+        cursor.execute("SELECT * FROM paciente WHERE user_id = %s", (user_id,))
+        user_data = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        if user_data:
+            return Paciente(user_id=user_id)
+        return None
+
+    def is_active(self):
+        return True
