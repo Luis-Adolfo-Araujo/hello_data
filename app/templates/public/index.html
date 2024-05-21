@@ -1,86 +1,63 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>diet.ia - Dieta Personalizada com IA</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            color: #fff;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: black;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            font-size: 2rem;
-            color: #4CAF50;
-            margin: 0;
-        }
-        header nav {
-            display: flex;
-            gap: 1rem;
-        }
-        header nav a {
-            text-decoration: none;
-            color: #4CAF50;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid #4CAF50;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        header nav a:hover {
-            background-color: #4CAF50;
-            color: #fff;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-        .cta-button {
-            background-color: #4CAF50;
-            color: black;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .cta-button:hover {
-            background-color: #45a049;
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #777;
-        }
-    </style>
+    <title>diet.ia</title>
+    <link rel="stylesheet" href="../../static/css/index.css">
 </head>
 <body>
     <header>
-        <h1>diet.ia</h1>
+        <div class="logo"><a href="#">diet.ia</a></div>
         <nav>
-            <a href="login">Login</a>
-            <a href="signup">Cadastro</a>
+            <ul>
+                <li><a href="/login" class="button">Entrar</a></li>
+                <li><a href="/signup" class="button">Registrar</a></li>
+            </ul>
         </nav>
     </header>
-    <div class="container">
-        <p>Descubra a dieta ideal para você com a ajuda da nossa inteligência artificial. Preencha a sua anamnese e receba um plano alimentar exclusivo.</p>
-        <button class="cta-button" onclick="location.href='formulario.html'">Comece Agora</button>
-    </div>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Sua dieta inteligente</h1>
+                <p>dieta rápida para resultados rápidos</p>
+                <div class="hero-buttons">
+                    <a href="/login" class="button">Criar um plano</a>
+                    <a href="#" class="button">Saiba mais</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="../../static/img/nutri.jpeg" alt="Healthy Food">
+            </div>
+        </section>
+        <section class="plan-options">
+            <div class="option">
+                <img src="" alt="Plan 1">
+                <h2>Title K Sobce</h2>
+                <p>Description of the plan goes here...</p>
+                <a href="#" class="button">Choose</a>
+            </div>
+            <div class="option">
+                <img src="" alt="Plan 2">
+                <h2>Ra mD Iifbock</h2>
+                <p>Description of the plan goes here...</p>
+                <a href="#" class="button">Sign Up</a>
+            </div>
+            <div class="option">
+                <img src="" alt="Plan 3">
+                <h2>Peatmrsisis</h2>
+                <p>Description of the plan goes here...</p>
+                <a href="#" class="button">Learn More</a>
+            </div>
+        </section>
+    </main>
     <footer>
-        <p>&copy; 2024 diet.ia. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Diet Plan. All rights reserved.</p>
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
     </footer>
 </body>
 </html>
