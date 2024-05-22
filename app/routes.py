@@ -17,8 +17,11 @@ def main_route():
 @auth.route("/home", methods=["GET"])
 @login_required
 def home():
-    if current_user.is_authenticated:
-        return render_template("public/templates/home.html")
+    try:
+        if current_user.is_authenticated:
+            return render_template("public/templates/home.html")
+    except:
+        return redirect(url_for('auth.main_route'))
 
 @auth.route("/login")
 def render_login():
@@ -111,3 +114,8 @@ def signup_post():
 def logout():
     logout_user()
     return render_template("public/index.html")
+
+@auth.route("/anamnese")
+@login_required
+def anamnese():
+    return render_template("public/templates/anamnesis.html")

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/anamnesis.css">
+    <script src="../../../static/js/anamnesis.js"></script>
+    <title>diet.ia | Anamnese</title>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="/">diet.ia</a></div>
+    <nav></nav>
+</header>
+<div class="form-container">
+    <form action="/register" class="form" method="POST" onsubmit="handleFormSubmission(event)">
+        <div class="form-column" id="form-column-1">
+            <div class="flex-column">
+                <label>Objetivo</label>
+                <select name="objetivo" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="perdaPeso">Perda de peso</option>
+                    <option value="ganhoPeso">Ganho de peso</option>
+                    <option value="melhoraDaSaudeGeral">Melhora da saúde geral</option>
+                    <option value="desempenhoEsportivo">Desempenho Esportivo</option>
+                    <option value="condicaoMedica">Tratamento de condição médica</option>
+                    <option value="melhoraSono">Melhora do sono</option>
+                    <option value="saudeDigestiva">Saúde Digestiva</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Restrição Alimentar</label>
+                <select name="restricao_alimentar" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="nenhuma">Nenhuma</option>
+                    <option value="vegetariana">Vegetariana</option>
+                    <option value="vegana">Vegana</option>
+                    <option value="gluten">Sem Glúten</option>
+                    <option value="lactose">Sem Lactose</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Ingere Álcool</label>
+                <select name="ingere_alcool" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="não">Não</option>
+                    <option value="ocasionalmente">Ocasionalmente</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Dorme Bem</label>
+                <select name="dorme_bem" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="não">Não</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Horas de Sono</label>
+                <select name="horas_sono" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="menos5">Menos de 5 horas</option>
+                    <option value="5-6">5-6 horas</option>
+                    <option value="6-7">6-7 horas</option>
+                    <option value="7-8">7-8 horas</option>
+                    <option value="mais8">Mais de 8 horas</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Pratica Exercícios</label>
+                <select name="pratica_exercicios" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="não">Não</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Patologia</label>
+                <select name="patologia" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="nenhuma">Nenhuma</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="hipertensao">Hipertensão</option>
+                    <option value="cardiovascular">Doença Cardiovascular</option>
+                    <option value="digestiva">Doença Digestiva</option>
+                    <option value="outra">Outra</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Medicamentos</label>
+                <select name="medicamentos" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="nenhum">Nenhum</option>
+                    <option value="antibioticos">Antibióticos</option>
+                    <option value="analgesicos">Analgésicos</option>
+                    <option value="antidepressivos">Antidepressivos</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Apetite</label>
+                <select name="apetite" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="normal">Normal</option>
+                    <option value="baixo">Baixo</option>
+                    <option value="alto">Alto</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-column" id="form-column-2">
+
+            <div class="flex-column">
+                <label>Mastigação</label>
+                <select name="mastigacao" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="normal">Normal</option>
+                    <option value="rapida">Rápida</option>
+                    <option value="lenta">Lenta</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Hábito Intestinal</label>
+                <select name="habito_intestinal" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="normal">Normal</option>
+                    <option value="prisaoVentre">Prisão de Ventre</option>
+                    <option value="diarreia">Diarreia</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Frequência de Evacuação</label>
+                <select name="frequencia_evacuacao" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="1xDia">1 vez ao dia</option>
+                    <option value="2xDia">2 vezes ao dia</option>
+                    <option value="3xSemana">3 vezes na semana</option>
+                    <option value="1xSemana">1 vez na semana</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Formato das Fezes</label>
+                <select name="formato_fezes" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="normal">Normal</option>
+                    <option value="duras">Duras</option>
+                    <option value="moles">Moles</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Usa Laxante</label>
+                <select name="usa_laxante" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="não">Não</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Cor das Fezes</label>
+                <select name="cor_fezes" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="marrom">Marrom</option>
+                    <option value="preta">Preta</option>
+                    <option value="amarela">Amarela</option>
+                    <option value="verde">Verde</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Ingestão Hídrica</label>
+                <select name="ingestao_hidrica" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="menos1L">Menos de 1L</option>
+                    <option value="1-2L">1-2L</option>
+                    <option value="2-3L">2-3L</option>
+                    <option value="mais3L">Mais de 3L</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Sintomas</label>
+                <select name="sintomas" class="input" required>
+                    <option disabled selected>Selecione</option>
+                    <option value="nenhum">Nenhum</option>
+                    <option value="dorCabeca">Dor de cabeça</option>
+                    <option value="nausea">Náusea</option>
+                    <option value="fadiga">Fadiga</option>
+                    <option value="outros">Outros</option>
+                </select>
+            </div>
+        </div>
+
+        <p id="mensagem" style="color: red;"></p>
+        <button type="submit" id="nextButton" class="button-submit" style="color: white;">Próximo</button>
+    </form>
+</div>
+</body>
+<script>
+    document.getElementById('nextButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        // passar uma lista com os valores desse form para a função `showNextFields()` dentro de um dict {"info": info_pac}
+        // no showNextFields() pegar os valores de metabolico e adicionar no dict {"info": info_pac, "metabolico": metabolico}
+        // entao retornar para uma rota e fazer a inserção no banco 
+        showNextFields();
+    });
+</script>
+</body>
+</html>
+</html>
