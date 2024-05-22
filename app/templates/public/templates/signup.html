@@ -153,4 +153,14 @@
     </form>
   </div>
   </body>
+  <script>
+      document.querySelector('select[name="sexo"]').addEventListener('change', function () {
+      var gestanteContainer = document.getElementById('gestante-container');
+      if (this.value === 'feminino') {
+        gestanteContainer.style.display = 'block';
+      } else {
+        gestanteContainer.style.display = 'none';
+      }
+  });
+  </script>
 </html>

@@ -83,11 +83,9 @@ def signup_post():
         bairro = request.form.get('bairro')
         cidade = request.form.get('cidade')
         uf = request.form.get('uf')
-        print(cpf)
         query = '''SELECT cpf FROM paciente WHERE cpf = %s;'''
         cursor.execute(query, (cpf,))
         user = cursor.fetchone()
-        print(user)
 
         if user:
             error_message = "CPF ja cadastrado"

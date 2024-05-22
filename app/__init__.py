@@ -19,8 +19,6 @@ def create_app():
 
     login_manager.login_view = 'auth.login'
 
-    from .models import Paciente
-
     @login_manager.user_loader
     def load_user(user_id):
         from .models import Paciente

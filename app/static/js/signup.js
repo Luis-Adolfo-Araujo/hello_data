@@ -68,15 +68,6 @@ function formatTelefone(input) {
       }
   }
 
-  document.querySelector('select[name="sexo"]').addEventListener('change', function () {
-      var gestanteContainer = document.getElementById('gestante-container');
-      if (this.value === 'feminino') {
-        gestanteContainer.style.display = 'block';
-      } else {
-        gestanteContainer.style.display = 'none';
-      }
-  });
-
   function handleFormSubmission(event) {
     event.preventDefault();
     
@@ -90,9 +81,11 @@ function formatTelefone(input) {
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data)
         if (data.error) {
             document.getElementById('mensagem').innerText = data.error; 
         } else {
+            console.log('here');
             window.location.href = '/login'; 
         }
     })
