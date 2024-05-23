@@ -13,7 +13,7 @@
     <nav></nav>
 </header>
 <div class="form-container">
-    <form action="/register" class="form" method="POST" onsubmit="handleFormSubmission(event)">
+    <form id="anamneseForm" action="/register" class="form" method="POST" onsubmit="handleFormSubmission(event)">
         <div class="form-column" id="form-column-1">
             <div class="flex-column">
                 <label>Objetivo</label>
@@ -210,13 +210,10 @@
 </div>
 </body>
 <script>
-    document.getElementById('nextButton').addEventListener('click', function(event) {
+    document.getElementById('anamneseForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        // passar uma lista com os valores desse form para a função `showNextFields()` dentro de um dict {"info": info_pac}
-        // no showNextFields() pegar os valores de metabolico e adicionar no dict {"info": info_pac, "metabolico": metabolico}
-        // entao retornar para uma rota e fazer a inserção no banco 
-        showNextFields();
-    });
+        handleFormSubmission(event);
+    }); 
 </script>
 </body>
 </html>
