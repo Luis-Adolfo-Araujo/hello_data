@@ -162,8 +162,10 @@ footer {
     color: white;
     text-align: center;
     padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
-
 footer ul {
     list-style: none;
     padding: 0;

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/anamnesis_summary.css">
+    <title>diet.ia | Sumário</title>
+    <style>
+        .data-background {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay" class="overlay"></div>
+    <div id="loading-spinner" class="loading-spinner"></div>
+    <header>
+        <div class="logo"><a href="/">diet.ia</a></div>
+        <nav></nav>
+    </header>
+    <div class="form-container">
+        <div class="form-column">
+            <h2>Dados do Paciente</h2>
+            <div id="patient-info" class="data-background">
+                <!-- Dados do paciente serão inseridos aqui -->
+            </div>
+        </div>
+
+        <div class="form-column">
+            <h2>Rastreamento Metabólico</h2>
+            <div id="metabolic-tracking" class="data-background">
+                <!-- Dados do rastreamento metabólico serão inseridos aqui -->
+            </div>
+        </div>
+
+        <div class="form-column">
+            <h2>Antropometria</h2>
+            <div id="anthropometry" class="data-background">
+                <!-- Dados de antropometria serão inseridos aqui -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loadingSpinner = document.getElementById("loading-spinner");
+            const overlay = document.getElementById("overlay");
+            loadingSpinner.classList.remove("hidden");
+            overlay.classList.remove("hidden");
+            fetch("/get_anamnesis")
+                .then(response => response.json())
+                .then(data => {
+                    const patientInfo = document.getElementById("patient-info");
+                    const metabolicTracking = document.getElementById("metabolic-tracking");
+                    const anthropometry = document.getElementById("anthropometry");
+
+                    if (data.error) {
+                        patientInfo.innerHTML = "<p>Erro ao carregar os dados do paciente.</p>";
+                        return;
+                    }
+                    loadingSpinner.classList.add("hidden");
+                    overlay.classList.add("hidden");
+                    data.forEach(item => {
+                        // Patient Info
+                        patientInfo.innerHTML = `
+                            <p>Nome: ${item.nome}</p>
+                            <p>Sexo: ${item.sexo}</p>
+                            <p>Gestante: ${item.gestante ? "Sim" : "Não"}</p>
+                            <p>Objetivo: ${item.objetivo}</p>
+                            <p>Restrição Alimentar: ${item.resticao_alimentar}</p>
+                            <p>Ingere Álcool: ${item.ingere_alcool}</p>
+                            <p>Dorme Bem: ${item.dorme_bem ? "Sim" : "Não"}</p>
+                            <p>Horas de Sono: ${item.horas_sono}</p>
+                            <p>Pratica Exercícios: ${item.pratica_exercicios ? "Sim" : "Não"}</p>
+                            <p>Patologia: ${item.patologia}</p>
+                            <p>Medicamentos: ${item.Medicamentos}</p>
+                            <p>Apetite: ${item.apetite}</p>
+                            <p>Mastigação: ${item.mastigacao}</p>
+                            <p>Hábito Intestinal: ${item.habito_intestinal}</p>
+                            <p>Frequência de Evacuação: ${item.frequencia_evacuacao}</p>
+                            <p>Formato das Fezes: ${item.formato_fezes}</p>
+                            <p>Usa Laxante: ${item.usa_laxante ? "Sim" : "Não"}</p>
+                            <p>Cor das Fezes: ${item.cor_fezes}</p>
+                            <p>Ingestão Hídrica: ${item.ingestao_hidrica}</p>
+                            <p>Sintomas: ${item.sintomas}</p>
+                        `;
+
+                        // Metabolic Tracking Info
+                        let metabolicHtml = "";
+                        const metabolicKeys = [
+                            "tontura", "sensacao_desmaio", "insonia", "olhos_lacrimejantes_cocando",
+                            "olhos_inchados_vermelhos", "olheiras", "visao_borrada", "coceira_ouvido",
+                            "dor_ouvido", "retirada_fluido", "zunido_ouvido", "nariz_entupido",
+                            "sinusite", "corrimento_nasal", "espirro", "coceira_olhos",
+                            "ataque_espirro", "muco_excessivo", "tosse_cronica", "dor_garganta",
+                            "necessidade_limpar_garganta", "rouquidao", "lingua_gengiva_labio_inchado",
+                            "acne", "perda_cabelo", "suor_excessivo", "feridas_cocam", "pele_seca",
+                            "vermelhidao", "calor_excessivo", "batida_irregular_coracao",
+                            "batidas_rapidas_demais_coracao", "dor_peito", "dor_cabeca"
+                        ];
+
+                        metabolicKeys.forEach(key => {
+                            if (item[key]) {
+                                metabolicHtml += `<p>${key.replace(/_/g, ' ')}: Sim</p>`;
+                            }
+                        });
+
+                        metabolicTracking.innerHTML = metabolicHtml;
+
+                        // Anthropometry Info
+                        anthropometry.innerHTML = `
+                            <p>Data: ${item.data_antropometria}</p>
+                            <p>Altura: ${item.altura}</p>
+                            <p>Peso Atual: ${item.peso_atual}</p>
+                            <p>Peso Ideal: ${item.peso_ideal}</p>
+                            <p>Nível de Atividade: ${item.nivel_atividade}</p>
+                        `;
+                    });
+                })
+                .catch(error => {
+                    loadingSpinner.classList.add("hidden");
+                    overlay.classList.add("hidden");
+                    console.error("Error fetching anamnesis data:", error);
+                    patientInfo.innerHTML = "<p>Erro ao carregar os dados do paciente.</p>";
+                });
+        });
+    </script>
+</body>
+</html>
