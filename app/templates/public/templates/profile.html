@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/signup.css">
+    <title>diet.ia | Perfil</title>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="/">diet.ia</a></div>
+    <nav></nav>
+</header>
+<div class="form-container">
+    <form id="profileForm" action="/update_profile" class="form" method="POST">
+        <div class="form-column">
+            <div class="flex-column">
+                <label>Nome</label>
+            </div>
+            <div class="inputForm" style="background-color: lightgray;">
+                <input type="text" name="nome" class="input" style="background-color: lightgray;" placeholder="Nome" value="{{ paciente.nome }}" readonly/>
+            </div>
+
+            <div class="flex-column">
+                <label>CPF</label>
+            </div>
+            <div class="inputForm" style="background-color: lightgray;">
+                <input type="text" name="cpf" class="input" placeholder="CPF" style="background-color: lightgray;" value="{{ paciente.cpf }}" readonly/>
+            </div>
+
+            <div class="flex-column">
+                <label>Email</label>
+            </div>
+            <div class="inputForm">
+                <input type="email" name="email" class="input" placeholder="Email" value="{{ paciente.email }}" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Telefone</label>
+            </div>
+            <div class="inputForm">
+                <input type="tel" name="telefone" class="input" placeholder="Telefone" value="{{ paciente.telefone }}" required/>
+            </div>
+
+            <div class="flex-column" id="gestante-container" style="display: {% if paciente.sexo == 'feminino' %} block {% else %} none {% endif %}">
+                <label>Gestante</label>
+                <select name="gestante" class="input">
+                    <option value="True" {% if paciente.gestante %} selected {% endif %}>Sim</option>
+                    <option value="False" {% if not paciente.gestante %} selected {% endif %}>Não</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Data de Nascimento</label>
+            </div>
+            <div class="inputForm" style="background-color: lightgray;">
+                <input type="text" name="data_nascimento" class="input" style="background-color: lightgray;" placeholder="DD/MM/AAAA" value="{{ paciente.data_nascimento }}" readonly/>
+            </div>
+
+            <div class="flex-column">
+                <label>Sexo</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="sexo" class="input" value="{{ paciente.sexo }}" readonly/>
+            </div>
+        </div>
+
+        <div class="form-column">
+            <div class="flex-column">
+                <label>CEP</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="cep" class="input" placeholder="CEP" value="{{ paciente.cep }}" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Rua</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="rua" class="input" placeholder="Rua" value="{{ paciente.rua }}" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Número</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="numero" class="input" placeholder="Número" value="{{ paciente.numero }}" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Bairro</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="bairro" class="input" placeholder="Bairro" value="{{ paciente.bairro }}" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Cidade</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="cidade" class="input" placeholder="Cidade" value="{{ paciente.cidade }}" required/>
+            </div>
+            
+            <div class="flex-column">
+                <label>UF</label>
+            </div>
+            <div class="inputForm">
+                <select name="uf" id="uf" class="input" required>
+                    <option value="{{ paciente.uf }}">{{ paciente.uf }}</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AM">AM</option>
+                    <option value="AP">AP</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MG">MG</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="PR">PR</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="RS">RS</option>
+                    <option value="SC">SC</option>
+                    <option value="SE">SE</option>
+                    <option value="SP">SP</option>
+                    <option value="TO">TO</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="button-submit" style="color: white;">Salvar Alterações</button>
+    </form>
+</div>
+</body>
+
+<script>
+    const currentProfileData = {
+        nome: "{{ paciente.nome }}",
+        cpf: "{{ paciente.cpf }}",
+        email: "{{ paciente.email }}",
+        telefone: "{{ paciente.telefone }}",
+        gestante: "{{ paciente.gestante }}",
+        data_nascimento: "{{ paciente.data_nascimento }}",
+        sexo: "{{ paciente.sexo }}",
+        cep: "{{ paciente.cep }}",
+        rua: "{{ paciente.rua }}",
+        numero: "{{ paciente.numero }}",
+        bairro: "{{ paciente.bairro }}",
+        cidade: "{{ paciente.cidade }}",
+        uf: "{{ paciente.uf }}"
+    };
+
+    function formHasChanges() {
+        const formData = new FormData(document.getElementById('profileForm'));
+        for (let [key, value] of formData.entries()) {
+            if (value !== currentProfileData[key]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        if (!formHasChanges()) {
+            event.preventDefault();
+            alert('Nenhuma alteração foi feita.');
+        }
+    });
+</script>
+</html>

@@ -1,4 +1,14 @@
-DB_HOST = 'ubuntu@ec2-18-234-44-122.compute-1.amazonaws.com'
-DB_NAME = 'hellodiet'
-DB_USER = 'root'
-DB_PASS = 'root'
+import psycopg2
+from config import *
+from flask import jsonify
+
+conn_str = f"host={DB_HOST} port={DB_PORT} dbname={DB_NAME} user={DB_USER} password={DB_PASS}"
+
+def get_db_connection():
+    try:
+        conn = psycopg2.connect(conn_str)
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        return conn, cursor
+    except psycopg2.Error as e:
+        print("Error connecting to the database:", e)
+        return None, None

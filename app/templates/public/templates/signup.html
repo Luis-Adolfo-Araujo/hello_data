@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/signup.css">
+    <script src="../../../static/js/signup.js"></script>
+    <title>diet.ia | Cadastrar</title>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="/">diet.ia</a></div>
+    <nav></nav>
+</header>
+<div class="form-container">
+  <form action="/register" class="form" method="POST" onsubmit="handleFormSubmission(event)">
+        <div class="form-column">
+            <div class="flex-column">
+                <label>Nome</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="nome" class="input" placeholder="Nome" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Email</label>
+            </div>
+            <div class="inputForm">
+                <input type="email" name="email" class="input" placeholder="Email" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Senha</label>
+            </div>
+            <div class="inputForm">
+                <input type="password" id="senha" name="senha" class="input" placeholder="Senha" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>CPF</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="cpf" class="input" placeholder="CPF" oninput="formatCPF(this)" maxlength="14" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Telefone</label>
+            </div>
+            <div class="inputForm">
+                <input type="tel" name="telefone" class="input" placeholder="Telefone" oninput="formatTelefone(this)" maxlength="14" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Data de Nascimento</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="data_nascimento" class="input" placeholder="DD/MM/AAAA" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 47" oninput="formatDate(this)" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Sexo</label>
+                <select name="sexo" class="input">
+                    <option value="">Selecione</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-column">
+            <div class="flex-column" id="gestante-container" style="display: none;">
+                <label>Gestante</label>
+                <select name="gestante" class="input">
+                    <option value="">Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>CEP</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="cep" class="input" placeholder="CEP" oninput="formatCEP(this)" maxlength="9" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Rua</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="rua" class="input" placeholder="Rua" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Número</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="numero" class="input" placeholder="Número" oninput="allowOnlyNumbers(this)" maxlength="6" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Bairro</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="bairro" class="input" placeholder="Bairro" required/>
+            </div>
+
+            <div class="flex-column">
+                <label>Cidade</label>
+            </div>
+            <div class="inputForm">
+                <input type="text" name="cidade" class="input" placeholder="Cidade" required/>
+            </div>
+
+            <div class="flex-column">
+              <label for="uf">UF</label>
+          </div>
+          <div class="inputForm">
+              <select name="uf" id="uf" class="input" required>
+                  <option value="">Selecione</option>
+                  <option value="AC">AC</option>
+                  <option value="AL">AL</option>
+                  <option value="AM">AM</option>
+                  <option value="AP">AP</option>
+                  <option value="BA">BA</option>
+                  <option value="CE">CE</option>
+                  <option value="DF">DF</option>
+                  <option value="ES">ES</option>
+                  <option value="GO">GO</option>
+                  <option value="MA">MA</option>
+                  <option value="MG">MG</option>
+                  <option value="MS">MS</option>
+                  <option value="MT">MT</option>
+                  <option value="PA">PA</option>
+                  <option value="PB">PB</option>
+                  <option value="PE">PE</option>
+                  <option value="PI">PI</option>
+                  <option value="PR">PR</option>
+                  <option value="RJ">RJ</option>
+                  <option value="RN">RN</option>
+                  <option value="RO">RO</option>
+                  <option value="RR">RR</option>
+                  <option value="RS">RS</option>
+                  <option value="SC">SC</option>
+                  <option value="SE">SE</option>
+                  <option value="SP">SP</option>
+                  <option value="TO">TO</option>
+              </select>
+          </div>
+          <p id="mensagem" style="color: red;"></p>
+        </div>
+        <button type="submit" class="button-submit" style="color: white;">Cadastrar</button>
+    </form>
+  </div>
+  </body>
+  <script>
+      document.querySelector('select[name="sexo"]').addEventListener('change', function () {
+      var gestanteContainer = document.getElementById('gestante-container');
+      if (this.value === 'feminino') {
+        gestanteContainer.style.display = 'block';
+      } else {
+        gestanteContainer.style.display = 'none';
+      }
+  });
+  </script>
+</html>
