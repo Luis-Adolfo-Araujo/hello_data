@@ -302,7 +302,7 @@ def anthropometry_post():
     insert_query = '''INSERT INTO antropometria (data, altura, peso_ideal, peso_atual, nivel_atividade)
     VALUES (%s, %s, %s, %s, %s)'''
 
-    cursor.execute(insert_query, (data, altura, peso_atual, peso_ideal, nivel_atividade))
+    cursor.execute(insert_query, (data, altura, peso_ideal, peso_atual, nivel_atividade))
     cursor.execute("SELECT LASTVAL();")
     id_antropometria = cursor.fetchone()[0]
     conn.commit()
@@ -403,6 +403,8 @@ def get_patient_anamnesis():
             paciente_antropometria pa ON p.User_id = pa.id_usuario
         LEFT JOIN 
             antropometria a ON pa.id_antropometria = a.id_antropometria
+        WHERE 
+            p.User_id = %s
         """
         
         cursor.execute(query, (current_user.id,))
@@ -413,11 +415,16 @@ def get_patient_anamnesis():
         cursor.close()
         conn.close()
 
+        if any(value is None for row in anamnesis_data for value in row.values()):
+            print('Você não possui uma anamnese cadastrada.')
+            return jsonify(None)
+
         return jsonify(anamnesis_data)
 
     except Exception as e:
         print(f"Error: {e}")
-        return redirect(url_for('auth.home'))
+        return jsonify({"error": "An error occurred while fetching data"}), 500
+
 
 @auth.route("/second_join")
 @login_required
@@ -481,3 +488,99 @@ def get_patient_anamnesis_simplified():
 @login_required
 def anamnesis_summary():
     return render_template("public/templates/anamnesis_summary.html")
+
+@auth.route('/delete_anamnesis', methods=["DELETE"])
+@login_required
+def delete_anamnesis():
+    conn, cursor = get_db_connection()
+    
+    if conn is None or cursor is None:
+        return jsonify({"error": "Failed to connect to the database"}), 500
+
+    try:
+        sql_query = """
+        BEGIN;
+
+        -- Excluir dados da tabela info_paciente
+        DELETE FROM info_paciente
+        WHERE id_usuario = %s;
+
+        -- Excluir dados da tabela paciente_metabolico
+        DELETE FROM paciente_metabolico
+        WHERE id_usuario = %s;
+
+        -- Excluir dados da tabela paciente_antropometria
+        DELETE FROM paciente_antropometria
+        WHERE id_usuario = %s;
+
+        -- Excluir dados da tabela rastreamento_metabolico
+        DELETE FROM rastreamento_metabolico
+        WHERE Id_metabolico IN (SELECT id_metabolico FROM paciente_metabolico WHERE id_usuario = %s);
+
+        -- Excluir dados da tabela antropometria
+        DELETE FROM antropometria
+        WHERE id_antropometria IN (SELECT id_antropometria FROM paciente_antropometria WHERE id_usuario = %s);
+
+        COMMIT;
+        """
+        user_id = current_user.id
+        cursor.execute(sql_query, (user_id, user_id, user_id, user_id, user_id))
+        conn.commit()
+        return jsonify({"message": "Anamnese deletada com sucesso!"}), 200
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+@auth.route("/profile")
+@login_required
+def get_profile():
+    conn, cursor = get_db_connection()
+    
+    if conn is None or cursor is None:
+        return jsonify({"error": "Failed to connect to the database"}), 500
+
+    query = '''SELECT * FROM paciente WHERE user_id = %s'''
+    cursor.execute(query, (current_user.id,))
+    paciente = cursor.fetchone()
+    conn.commit()
+
+    return render_template("public/templates/profile.html", paciente=paciente)
+
+@auth.route("/update_profile", methods=["POST"])
+@login_required
+def update_profile():
+    conn, cursor = get_db_connection()
+    
+    if conn is None or cursor is None:
+        return jsonify({"error": "Failed to connect to the database"}), 500
+
+    try:
+        email = request.form.get('email')
+        telefone = request.form.get('telefone')
+        gestante = request.form.get('gestante') == 'True'
+        cep = request.form.get('cep')
+        rua = request.form.get('rua')
+        numero = request.form.get('numero')
+        bairro = request.form.get('bairro')
+        cidade = request.form.get('cidade')
+        uf = request.form.get('uf')
+
+        query = '''
+        UPDATE paciente
+        SET email = %s, telefone = %s, gestante = %s, cep = %s, rua = %s, numero = %s, bairro = %s, cidade = %s, uf = %s
+        WHERE user_id = %s
+        '''
+        
+        cursor.execute(query, (email, telefone, gestante, cep, rua, numero, bairro, cidade, uf, current_user.id))
+        conn.commit()
+        
+        return redirect(url_for('auth.home'))
+    except Exception as e:
+        conn.rollback()
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+        conn.close()
