@@ -43,7 +43,6 @@ def login():
         query = '''SELECT * FROM paciente WHERE email = %s;'''
         cursor.execute(query, (email,))
         user_data = cursor.fetchone()
-        print("user: ", user_data)
         if user_data is None or not check_password_hash(user_data['senha'], senha):
             error = "Email ou senha incorretos"
             flash(error, 'login_error')
@@ -87,12 +86,12 @@ def signup_post():
         bairro = request.form.get('bairro')
         cidade = request.form.get('cidade')
         uf = request.form.get('uf')
-        query = '''SELECT cpf FROM paciente WHERE cpf = %s;'''
-        cursor.execute(query, (cpf,))
+        query = '''SELECT cpf FROM paciente WHERE cpf = %s OR email = %s OR telefone = %s;'''
+        cursor.execute(query, (cpf, email, telefone))
         user = cursor.fetchone()
 
         if user:
-            error_message = "CPF ja cadastrado"
+            error_message = "Usuário ja cadastrado"
             redirect(url_for('auth.signup'))
             print(error_message)
             return jsonify({"error": error_message}), 400
@@ -320,3 +319,165 @@ def anthropometry_post():
 
     print("Registro antropométrico cadastrado com sucesso!")
     return redirect(url_for('auth.home'))
+
+@auth.route("/get_anamnesis")
+@login_required
+def get_patient_anamnesis():
+    conn, cursor = get_db_connection()
+    
+    if conn is None or cursor is None:
+        return jsonify({"error": "Failed to connect to the database"}), 500
+    try:
+        query = """
+        SELECT 
+            p.User_id,
+            p.nome,
+            p.sexo,
+            p.gestante,
+            ip.objetivo,
+            ip.resticao_alimentar,
+            ip.ingere_alcool,
+            ip.dorme_bem,
+            ip.horas_sono,
+            ip.pratica_exercicios,
+            ip.patologia,
+            ip.Medicamentos,
+            ip.apetite,
+            ip.mastigacao,
+            ip.habito_intestinal,
+            ip.frequencia_evacuacao,
+            ip.formato_fezes,
+            ip.usa_laxante,
+            ip.cor_fezes,
+            ip.ingestao_hidrica,
+            ip.sintomas,
+            rm.tontura,
+            rm.sensacao_desmaio,
+            rm.insonia,
+            rm.olhos_lacrimejantes_cocando,
+            rm.olhos_inchados_vermelhos,
+            rm.olheiras,
+            rm.visao_borrada,
+            rm.coceira_ouvido,
+            rm.dor_ouvido,
+            rm.retirada_fluido,
+            rm.zunido_ouvido,
+            rm.nariz_entupido,
+            rm.sinusite,
+            rm.corrimento_nasal,
+            rm.espirro,
+            rm.coceira_olhos,
+            rm.ataque_espirro,
+            rm.muco_excessivo,
+            rm.tosse_cronica,
+            rm.dor_garganta,
+            rm.necessidade_limpar_garganta,
+            rm.rouquidao,
+            rm.lingua_gengiva_labio_inchado,
+            rm.acne,
+            rm.perda_cabelo,
+            rm.suor_excessivo,
+            rm.feridas_cocam,
+            rm.pele_seca,
+            rm.vermelhidao,
+            rm.calor_excessivo,
+            rm.batida_irregular_coracao,
+            rm.batidas_rapidas_demais_coracao,
+            rm.dor_peito,
+            rm.dor_cabeca,
+            rm.data AS data_metabolico,
+            a.data AS data_antropometria,
+            a.altura,
+            a.peso_atual,
+            a.peso_ideal,
+            a.nivel_atividade
+        FROM 
+            paciente p
+        LEFT JOIN 
+            info_paciente ip ON p.User_id = ip.id_usuario
+        LEFT JOIN 
+            paciente_metabolico pm ON p.User_id = pm.id_usuario
+        LEFT JOIN 
+            rastreamento_metabolico rm ON pm.id_metabolico = rm.Id_metabolico
+        LEFT JOIN 
+            paciente_antropometria pa ON p.User_id = pa.id_usuario
+        LEFT JOIN 
+            antropometria a ON pa.id_antropometria = a.id_antropometria
+        """
+        
+        cursor.execute(query, (current_user.id,))
+        result = cursor.fetchall()
+        columns = [desc[0] for desc in cursor.description]
+        anamnesis_data = [dict(zip(columns, row)) for row in result]
+
+        cursor.close()
+        conn.close()
+
+        return jsonify(anamnesis_data)
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return redirect(url_for('auth.home'))
+
+@auth.route("/second_join")
+@login_required
+def get_patient_anamnesis_simplified():
+    conn, cursor = get_db_connection()
+    
+    if conn is None or cursor is None:
+        return jsonify({"error": "Failed to connect to the database"}), 500
+    try:
+        query = """
+        SELECT 
+            p.User_id,
+            p.nome,
+            p.sexo,
+            p.gestante,
+            ip.objetivo,
+            ip.resticao_alimentar,
+            ip.ingere_alcool,
+            ip.dorme_bem,
+            ip.horas_sono,
+            ip.pratica_exercicios,
+            ip.patologia,
+            ip.Medicamentos,
+            ip.apetite,
+            ip.mastigacao,
+            ip.habito_intestinal,
+            ip.frequencia_evacuacao,
+            ip.formato_fezes,
+            ip.usa_laxante,
+            ip.cor_fezes,
+            ip.ingestao_hidrica,
+            a.data AS data_antropometria,
+            a.altura,
+            a.peso_atual,
+            a.peso_ideal,
+            a.nivel_atividade
+        FROM 
+            paciente p
+        LEFT JOIN 
+            info_paciente ip ON p.User_id = ip.id_usuario
+        LEFT JOIN 
+            paciente_antropometria pa ON p.User_id = pa.id_usuario
+        LEFT JOIN 
+            antropometria a ON pa.id_antropometria = a.id_antropometria
+        """
+        
+        cursor.execute(query, (current_user.id,))
+        result = cursor.fetchall()
+        print(result)
+
+        cursor.close()
+        conn.close()
+
+        return jsonify(result)
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return redirect(url_for('auth.home'))
+
+@auth.route('/anamnesis_summary', methods=["GET"])
+@login_required
+def anamnesis_summary():
+    return render_template("public/templates/anamnesis_summary.html")
