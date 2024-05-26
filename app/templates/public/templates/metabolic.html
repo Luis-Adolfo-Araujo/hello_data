@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/anamnesis.css">
+    <title>diet.ia | Metabólico</title>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="/">diet.ia</a></div>
+    <nav></nav>
+</header>
+<div class="form-container">
+    <form action="/metabolic_post" class="form" method="POST">
+        <div class="form-column" id="form-column-1">
+            <div class="flex-column">
+                <label>Tontura</label>
+                <select name="tontura" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Sensação de Desmaio</label>
+                <select name="sensacao_desmaio" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Insônia</label>
+                <select name="insonia" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Olhos Lacrimejantes ou Coçando</label>
+                <select name="olhos_lacrimejantes_cocando" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Olhos Inchados ou Vermelhos</label>
+                <select name="olhos_inchados_vermelhos" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Olheiras</label>
+                <select name="olheiras" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Visão Borrada</label>
+                <select name="visao_borrada" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Coceira no Ouvido</label>
+                <select name="coceira_ouvido" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Dor no Ouvido</label>
+                <select name="dor_ouvido" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Retirada de Fluido do Ouvido</label>
+                <select name="retirada_fluido" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Zunido no Ouvido</label>
+                <select name="zunido_ouvido" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Nariz Entupido</label>
+                <select name="nariz_entupido" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Sinusite</label>
+                <select name="sinusite" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Corrimento Nasal</label>
+                <select name="corrimento_nasal" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Espirro</label>
+                <select name="espirro" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Coceira nos Olhos</label>
+                <select name="coceira_olhos" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Ataque de Espirros</label>
+                <select name="ataque_espirro" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Muco Excessivo</label>
+                <select name="muco_excessivo" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-column" id="form-column-2">
+
+            <div class="flex-column">
+                <label>Tosse Crônica</label>
+                <select name="tosse_cronica" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Dor de Garganta</label>
+                <select name="dor_garganta" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Necessidade de Limpar a Garganta</label>
+                <select name="necessidade_limpar_garganta" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Rouquidão</label>
+                <select name="rouquidao" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Língua, Gengiva ou Lábio Inchado</label>
+                <select name="lingua_gengiva_labio_inchado" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Acne</label>
+                <select name="acne" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Perda de Cabelo</label>
+                <select name="perda_cabelo" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Suor Excessivo</label>
+                <select name="suor_excessivo" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Feridas que Coçam</label>
+                <select name="feridas_cocam" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Pele Seca</label>
+                <select name="pele_seca" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Vermelhidão</label>
+                <select name="vermelhidao" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Calor Excessivo</label>
+                <select name="calor_excessivo" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Batida Irregular do Coração</label>
+                <select name="batida_irregular_coracao" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Batidas Rápidas Demais do Coração</label>
+                <select name="batidas_rapidas_demais_coracao" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Dor no Peito</label>
+                <select name="dor_peito" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="flex-column">
+                <label>Dor de Cabeça</label>
+                <select name="dor_cabeca" class="input" required>
+                    <option value="não" selected>Não</option>
+                    <option value="sim">Sim</option>
+                </select>
+            </div>
+        </div>
+
+        <p id="mensagem" style="color: red;"></p>
+        <button type="submit" id="nextButton" class="button-submit" style="color: white;">Próximo</button>
+    </form>
+</div>
+</body>
+</html>
