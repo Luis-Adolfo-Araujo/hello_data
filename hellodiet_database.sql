@@ -21,7 +21,7 @@ CREATE TABLE info_paciente (
     resticao_alimentar VARCHAR(100),
     ingere_alcool VARCHAR(10),
     dorme_bem BOOLEAN,
-    horas_sono INT,
+    horas_sono VARCHAR(20),
     pratica_exercicios BOOLEAN,
     patologia VARCHAR(100),
     Medicamentos VARCHAR(100),
@@ -72,7 +72,7 @@ CREATE TABLE rastreamento_metabolico (
     batidas_rapidas_demais_coracao BOOLEAN,
     dor_peito BOOLEAN,
     dor_cabeca BOOLEAN,
-    data DATE
+    data TIMESTAMP
 );
 
 CREATE TABLE antropometria (
@@ -87,13 +87,13 @@ CREATE TABLE antropometria (
 CREATE TABLE paciente_metabolico (
     id_usuario INT REFERENCES paciente(User_id),
     id_metabolico INT REFERENCES rastreamento_metabolico(Id_metabolico),
-    data DATE,
+    data TIMESTAMP,
     PRIMARY KEY (id_usuario, id_metabolico)
 );
 
 CREATE TABLE paciente_antropometria (
     id_usuario INT REFERENCES paciente(User_id),
     id_antropometria INT REFERENCES antropometria(id_antropometria),
-    data DATE,
+    data TIMESTAMP,
     PRIMARY KEY (id_usuario, id_antropometria)
 );

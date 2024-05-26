@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../static/css/anthropometry.css">
+    <script src="../../../static/js/anthropometry.js"></script>
+    <title>diet.ia | Antropometria</title>
+</head>
+<body>
+<header>
+    <div class="logo"><a href="/">diet.ia</a></div>
+    <nav></nav>
+</header>
+<div class="form-container">
+    <form action="/anthropometry_post" class="form" method="POST">
+        <div class="flex-column">
+            <label>Altura </label>
+            <input type="text" name="altura" class="input" placeholder="Altura" oninput="restrictAlturaInput(event)"/>
+        </div>
+
+        <div class="flex-column">
+            <label>Peso Atual </label>
+            <input type="text" name="peso_atual" class="input" placeholder="Peso Atual" oninput="restrictThreeCharsInput(event)"/>
+        </div>
+
+        <div class="flex-column">
+            <label>Peso Ideal </label>
+            <input type="text" name="peso_ideal" class="input" placeholder="Peso Ideal" oninput="restrictThreeCharsInput(event)"/>
+        </div>
+
+        <div class="flex-column">
+            <label>Nível de atividade</label>
+            <select name="nivel_atividade" class="input" required>
+                <option disabled selected>Selecione</option>
+                <option value="baixo">Baixo</option>
+                <option value="moderado">Moderado</option>
+                <option value="intenso">Intenso</option>
+            </select>
+        </div>
+        <p id="mensagem" style="color: red;"></p>
+        <button type="submit" id="nextButton" class="button-submit" style="color: white;">Próximo</button>
+    </form>
+</div>
+</body>
+</html>

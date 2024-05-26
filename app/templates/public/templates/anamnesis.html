@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../static/css/anamnesis.css">
-    <script src="../../../static/js/anamnesis.js"></script>
     <title>diet.ia | Anamnese</title>
 </head>
 <body>
@@ -13,7 +12,7 @@
     <nav></nav>
 </header>
 <div class="form-container">
-    <form id="anamneseForm" action="/register" class="form" method="POST" onsubmit="handleFormSubmission(event)">
+    <form action="/anamnese_post" class="form" method="POST">
         <div class="form-column" id="form-column-1">
             <div class="flex-column">
                 <label>Objetivo</label>
@@ -209,12 +208,4 @@
     </form>
 </div>
 </body>
-<script>
-    document.getElementById('anamneseForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleFormSubmission(event);
-    }); 
-</script>
-</body>
-</html>
 </html>
