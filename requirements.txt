@@ -1,0 +1,5 @@
+psycopg2
+Flask
+werkzeug
+flask-login
+flask-sqlalchemy
