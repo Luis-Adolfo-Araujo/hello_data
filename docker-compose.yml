@@ -1,0 +1,20 @@
+services:
+  pgdatabase:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=f1_data
+    volumes:
+      - "/home/luis/Documents/CesarSchool/periodo5/f1-data-pipeline/f1-pg-data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5435:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - /home/luis/Documents/CesarSchool/periodo5/f1-data-pipeline/f1-pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "8080:80"

@@ -84,6 +84,7 @@ CREATE TABLE antropometria (
     nivel_atividade VARCHAR(100)
 );
 
+-- Relaciona a tabela do paciente com a tabela de rastreamento metabólico 
 CREATE TABLE paciente_metabolico (
     id_usuario INT REFERENCES paciente(User_id),
     id_metabolico INT REFERENCES rastreamento_metabolico(Id_metabolico),
@@ -91,7 +92,8 @@ CREATE TABLE paciente_metabolico (
     PRIMARY KEY (id_usuario, id_metabolico)
 );
 
-CREATE TABLE paciente_antropometria (
+-- Relaciona a tabela do paciente com a tabela de antropometria
+CREATE TABLE paciente_antropometria ( 
     id_usuario INT REFERENCES paciente(User_id),
     id_antropometria INT REFERENCES antropometria(id_antropometria),
     data TIMESTAMP,
