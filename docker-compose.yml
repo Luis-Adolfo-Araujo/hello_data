@@ -1,14 +1,19 @@
+version: '3.8'
+
 services:
   pgdatabase:
-    image: postgres:13
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=f1_data
+      - POSTGRES_DB=hellodiet
     volumes:
       - "/home/luis/Documents/CesarSchool/periodo5/f1-data-pipeline/f1-pg-data:/var/lib/postgresql/data:rw"
     ports:
       - "5435:5432"
+
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -18,3 +23,18 @@ services:
       - /home/luis/Documents/CesarSchool/periodo5/f1-data-pipeline/f1-pgadmin-data:/var/lib/pgadmin
     ports:
       - "8080:80"
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    depends_on:
+      - pgdatabase
+    environment:
+      - DB_HOST=pgdatabase
+      - DB_NAME=hellodiet
+      - DB_USER=root
+      - DB_PASS=root
+      - DB_PORT=5432
+    ports:
+      - "5000:5000"
