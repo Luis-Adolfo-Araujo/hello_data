@@ -1,21 +1,40 @@
-
-
 version: '3.8'
-# Cada serviço é um container presente na aplicação
-services:
-  pythonapp:
-    build: ./src/ # exucutar a aplicação
-    command: sh -c "sleep 20s; python3 ./utils.py" #caminho do código-fonte e 20s para executar o script
-    depends_on:
-      - postgresql
 
-  postgresql:
-    image: postgres:13
-    restart: always # Conteiner sempre reiniciado em caso de falha
-    environment: 
-      POSTGRES_HOST: DB_HOST
-      POSTGRES_DB: DB_NAME
-      POSTGRES_USER: DB_USER
-      POSTGRES_PASSWORD: DB_PASS
+services:
+  pgdatabase:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=hellodiet
+    volumes:
+      - "/home/luis/Documents/CesarSchool/periodo5/f1-data-pipeline/f1-pg-data:/var/lib/postgresql/data:rw"
     ports:
-      - 'DB_PORT' 
+      - "5435:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    volumes:
+      - /home/luis/Documents/CesarSchool/periodo5/f1-data-pipeline/f1-pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    depends_on:
+      - pgdatabase
+    environment:
+      - DB_HOST=pgdatabase
+      - DB_NAME=hellodiet
+      - DB_USER=root
+      - DB_PASS=root
+      - DB_PORT=5432
+    ports:
+      - "5000:5000"
