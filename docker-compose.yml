@@ -26,8 +26,8 @@ services:
 
   app:
     build:
-      context: ./app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: app/Dockerfile
     depends_on:
       - pgdatabase
     environment:
